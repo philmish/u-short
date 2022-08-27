@@ -15,6 +15,7 @@ type ServerConf struct {
 
 func (c ServerConf)DefaultServer() *http.Server {
     c.Handler.Add("/echo/[a-zA-Z0-9]{0,14}", middleware.ChainMiddleware(echo, c.Middleware...))
+    c.Handler.Add("/re/[a-zA-Z0-9]{0,14}", middleware.ChainMiddleware(redirect, c.Middleware...))
     return &http.Server{
         Addr: c.Addr,
         Handler: c.Handler,
