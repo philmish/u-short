@@ -28,3 +28,14 @@ func (r *RegexMatcher)Add(pattern string, h http.HandlerFunc) error {
 
     return nil
 }
+
+func (r *RegexMatcher)ServeHTTP(res http.ResponseWriter, req *http.Request) {
+    toMatch := req.Method + " " + req.URL.Path
+    for regex, handler := range r.Handlers {
+        if r.Patterns[regex].MatchString(toMatch) {
+            handler(res, req)
+            return
+        }
+    }
+    http.NotFound(res, req)
+}
