@@ -10,14 +10,13 @@ import (
 	"time"
 
 	"github.com/philmish/u-short/internal"
-	"golang.org/x/net/context"
 )
 
 func main() {
     done := make(chan os.Signal, 1)
     signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
-    srv := internal.DevServer()
+    srv := internal.DevServer(9999)
 
     go func() {
         if err := srv.ListenAndServe(); err != http.ErrServerClosed {
