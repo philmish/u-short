@@ -1,8 +1,10 @@
 package internal
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -44,4 +46,36 @@ func redirect(res http.ResponseWriter, req *http.Request) {
 		http.NotFound(res, req)
 		return
 	}
+}
+
+type shortenReq struct {
+	Url string `json:"url"`
+}
+
+func (sr shortenReq) validate() bool {
+	_, err := url.ParseRequestURI(sr.Url)
+	return err == nil
+}
+
+func (sr shortenReq) short(taken strslice) string {
+	return shorten(sr.Url, taken)
+}
+
+func shortenUrl(res http.ResponseWriter, req *http.Request) {
+	//TODO Implement storage
+	defer req.Body.Close()
+	var request shortenReq
+
+	err := json.NewDecoder(req.Body).Decode(&request)
+	if err != nil {
+		http.Error(res, "Failed to decode request", http.StatusBadRequest)
+		return
+	}
+	if !request.validate() {
+		http.Error(res, "Invalid url", http.StatusBadRequest)
+		return
+	}
+	taken := strslice{"g"}
+	key := request.short(taken)
+	res.Write([]byte(key))
 }
