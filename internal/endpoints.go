@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/philmish/s-tree/kvdb"
 )
 
 func echo(res http.ResponseWriter, req *http.Request) {
@@ -27,21 +29,30 @@ func echo(res http.ResponseWriter, req *http.Request) {
 
 func redirect(res http.ResponseWriter, req *http.Request) {
 	defer req.Body.Close()
-	//TODO implement storage solution
-	mapping := map[string]string{
-		"g": "https://google.com/",
-	}
+	client := kvdb.DBClient{Addr: "/tmp/ushort"}
 	path := req.URL.Path
 	parts := strings.Split(path, "/")
 
 	if len(parts) > 2 {
 		key := parts[2]
-		for k, v := range mapping {
-			if k == key {
-				http.Redirect(res, req, v, 302)
-				return
-			}
+		/*
+		        mapping := map[string]string{
+		            "g": "https://google.com/",
+		        }
+				for k, v := range mapping {
+					if k == key {
+						http.Redirect(res, req, v, 302)
+						return
+					}
+				}
+		*/
+		uri, err := client.Get(key)
+		if err != nil {
+			http.Error(res, err.Error(), http.StatusBadRequest)
+			return
 		}
+		http.Redirect(res, req, uri, 302)
+		return
 	} else {
 		http.NotFound(res, req)
 		return

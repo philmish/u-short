@@ -9,6 +9,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/philmish/s-tree/kvdb"
 	"github.com/philmish/u-short/internal"
 )
 
@@ -17,6 +18,7 @@ func main() {
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	srv := internal.DevServer(9999)
+	db := kvdb.NewServer("/tmp/ushort")
 
 	go func() {
 		if err := srv.ListenAndServe(); err != http.ErrServerClosed {
@@ -29,6 +31,7 @@ func main() {
 	log.Println("Server stopped")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer func() {
+		db.Stop()
 		cancel()
 	}()
 
