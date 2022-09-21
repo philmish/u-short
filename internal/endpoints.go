@@ -36,15 +36,15 @@ func redirect(res http.ResponseWriter, req *http.Request) {
 	if len(parts) > 2 {
 		key := parts[2]
 		/*
-		        mapping := map[string]string{
-		            "g": "https://google.com/",
-		        }
-				for k, v := range mapping {
-					if k == key {
-						http.Redirect(res, req, v, 302)
-						return
+			        mapping := map[string]string{
+			            "g": "https://google.com/",
+			        }
+					for k, v := range mapping {
+						if k == key {
+							http.Redirect(res, req, v, 302)
+							return
+						}
 					}
-				}
 		*/
 		uri, err := client.Get(key)
 		if err != nil {
@@ -73,7 +73,7 @@ func (sr shortenReq) short(taken strslice) string {
 }
 
 func shortenUrl(res http.ResponseWriter, req *http.Request) {
-	//TODO Implement storage
+	client := kvdb.DBClient{Addr: "/tmp/ushort"}
 	defer req.Body.Close()
 	var request shortenReq
 
@@ -86,7 +86,16 @@ func shortenUrl(res http.ResponseWriter, req *http.Request) {
 		http.Error(res, "Invalid url", http.StatusBadRequest)
 		return
 	}
-	taken := strslice{"g"}
+	taken, err := client.Keys()
+	if err != nil {
+		http.Error(res, "Something went wrong checking the keys", http.StatusInternalServerError)
+		return
+	}
 	key := request.short(taken)
+	err = client.Set(key, request.Url)
+	if err != nil {
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
+	}
 	res.Write([]byte(key))
 }

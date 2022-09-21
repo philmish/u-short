@@ -1,2 +1,8 @@
 github.com/philmish/s-tree v0.0.0-20220920221442-1fd9d961ee54 h1:YNnFgOxq3cmKP2IivhFvpb5uMULmnIpdicio1cMk/TM=
 github.com/philmish/s-tree v0.0.0-20220920221442-1fd9d961ee54/go.mod h1:XYzeWEhM0S9f6F6UUQyst1KUs4yCaBwvZztdF/lBKgw=
+github.com/philmish/s-tree v0.0.0-20220920231907-29c8238e8d00 h1:GIYlX/xjOmzM3OEKlT70Ddb1wvNcc699S5gYsVFT8aQ=
+github.com/philmish/s-tree v0.0.0-20220920231907-29c8238e8d00/go.mod h1:XYzeWEhM0S9f6F6UUQyst1KUs4yCaBwvZztdF/lBKgw=
+github.com/philmish/s-tree v0.0.0-20220921200340-bc6685e97850 h1:MF0SNBskUQu+Tv57oEa6AjK46coMFZJqIleUKJmezfc=
+github.com/philmish/s-tree v0.0.0-20220921200340-bc6685e97850/go.mod h1:XYzeWEhM0S9f6F6UUQyst1KUs4yCaBwvZztdF/lBKgw=
+github.com/philmish/s-tree v0.0.0-20220921202115-3750202bc5fd h1:zjVYuuzQyfjKw1JHfoZEfxfBrRBjCtS2PAG2d8hKCug=
+github.com/philmish/s-tree v0.0.0-20220921202115-3750202bc5fd/go.mod h1:XYzeWEhM0S9f6F6UUQyst1KUs4yCaBwvZztdF/lBKgw=
