@@ -35,17 +35,6 @@ func redirect(res http.ResponseWriter, req *http.Request) {
 
 	if len(parts) > 2 {
 		key := parts[2]
-		/*
-			        mapping := map[string]string{
-			            "g": "https://google.com/",
-			        }
-					for k, v := range mapping {
-						if k == key {
-							http.Redirect(res, req, v, 302)
-							return
-						}
-					}
-		*/
 		uri, err := client.Get(key)
 		if err != nil {
 			http.Error(res, err.Error(), http.StatusBadRequest)

@@ -20,7 +20,7 @@ func (s strslice) includes(value string) bool {
 func shorten(link string, reserved strslice) string {
 	hashBytes := md5.Sum([]byte(link))
 	hash := hex.EncodeToString(hashBytes[:])
-	key := hash[:16]
+	key := hash[:13]
 	for reserved.includes(key) {
 		key = key[1:] + string(hash[rand.Intn(len(hash))])
 	}

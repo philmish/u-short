@@ -6,3 +6,5 @@ github.com/philmish/s-tree v0.0.0-20220921200340-bc6685e97850 h1:MF0SNBskUQu+Tv5
 github.com/philmish/s-tree v0.0.0-20220921200340-bc6685e97850/go.mod h1:XYzeWEhM0S9f6F6UUQyst1KUs4yCaBwvZztdF/lBKgw=
 github.com/philmish/s-tree v0.0.0-20220921202115-3750202bc5fd h1:zjVYuuzQyfjKw1JHfoZEfxfBrRBjCtS2PAG2d8hKCug=
 github.com/philmish/s-tree v0.0.0-20220921202115-3750202bc5fd/go.mod h1:XYzeWEhM0S9f6F6UUQyst1KUs4yCaBwvZztdF/lBKgw=
+github.com/philmish/s-tree v0.0.0-20220921213137-935e909e75cc h1:YIfHH8C1moQ+1XqqY12+n4HtSg9Pm7/pWgnK6ScarBo=
+github.com/philmish/s-tree v0.0.0-20220921213137-935e909e75cc/go.mod h1:XYzeWEhM0S9f6F6UUQyst1KUs4yCaBwvZztdF/lBKgw=
